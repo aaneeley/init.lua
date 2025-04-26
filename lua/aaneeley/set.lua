@@ -1,8 +1,6 @@
+-- See `:help vim.opt` or `:help option-list`
 
--- [[ Setting options ]]
--- See `:help vim.opt`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
+vim.g.have_nerd_font = true
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -31,7 +29,6 @@ vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
 
 vim.opt.splitright = true
-vim.opt.splitbelow = true
 
 -- Preview substitutions live, as you type!
 vim.opt.hlsearch = false
