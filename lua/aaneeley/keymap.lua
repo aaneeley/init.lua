@@ -31,3 +31,5 @@ vim.keymap.set(
 	":vsplit | lua vim.lsp.buf.definition()<CR>",
 	{ desc = "Jump to definition in new split" }
 )
+
+vim.api.nvim_set_keymap("t", "<Esc>", [[<C-\><C-n>]], { noremap = true })

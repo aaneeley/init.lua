@@ -25,5 +25,11 @@ return {
 			":VimuxCloseRunner<CR>",
 			{ noremap = true, desc = "[e]xit the open Vimux runner" }
 		)
+		vim.keymap.set(
+			"n",
+			"<leader>vi",
+			":VimuxInterruptRunner<CR>",
+			{ noremap = true, desc = "[i]nterrupt the open Vimux runner" }
+		)
 	end,
 }
