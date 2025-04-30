@@ -32,4 +32,7 @@ vim.keymap.set(
 	{ desc = "Jump to definition in new split" }
 )
 
-vim.api.nvim_set_keymap("t", "<Esc>", [[<C-\><C-n>]], { noremap = true })
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
+
+-- Open telescope file search relative to current file
+vim.keymap.set("n", "<leader>sf", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
