@@ -38,6 +38,8 @@ return { -- Fuzzy Finder (files, lsp, etc)
 				file_browser = {
 					display_stat = false,
 					git_status = false,
+					grouped = true,
+					initial_mode = "normal",
 				},
 			},
 		})
@@ -47,47 +49,69 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		pcall(require("telescope").load_extension, "ui-select")
 		pcall(require("telescope").load_extension, "file_browser")
 
-		-- See `:help telescope.builtin`
 		local builtin = require("telescope.builtin")
+
+		--  NOTE: Searches
+		--
+		-- vim.keymap.set("n", "<leader>s/", function()
+		-- 	builtin.live_grep({
+		-- 		grep_open_files = true,
+		-- 		prompt_title = "Live Grep in Open Files",
+		-- 	})
+		-- end, { desc = "[S]earch [/] in Open Files" })
+		-- vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
+		-- vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
+		-- vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
+		-- vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
+		-- vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 		vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 		vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-		-- vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
-		vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
-		vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
 		vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
 		vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
-		vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
-		vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 		vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
-		vim.keymap.set("n", "gd", builtin.lsp_definitions, { desc = "[D]efinition of word under cursor" })
-		vim.keymap.set("n", "gD", builtin.lsp_type_definitions, { desc = "type [D]efinition of word under cursor" })
-		vim.keymap.set("n", "gr", builtin.lsp_references, { desc = "[R]eferences of word under cursor" })
-
-		-- Slightly advanced example of overriding default behavior and theme
 		vim.keymap.set("n", "<leader>/", function()
-			-- You can pass additional configuration to Telescope to change the theme, layout, etc.
-			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_ivy({
 				winblend = 10,
 				previewer = false,
 			}))
 		end, { desc = "[/] Fuzzily search in current buffer" })
 
-		-- It's also possible to pass additional configuration options.
-		--  See `:help telescope.builtin.live_grep()` for information about particular keys
-		vim.keymap.set("n", "<leader>s/", function()
-			builtin.live_grep({
-				grep_open_files = true,
-				prompt_title = "Live Grep in Open Files",
+		-- Open file browser in neovim directory
+		vim.keymap.set("n", "<leader>en", function()
+			require("telescope").extensions.file_browser.file_browser({
+				path = vim.fn.stdpath("config"),
 			})
-		end, { desc = "[S]earch [/] in Open Files" })
-
-		-- Shortcut for searching your Neovim configuration files
+		end, { desc = "[E]xplore [N]eovim files" })
+		-- Search neovim directory
 		vim.keymap.set("n", "<leader>sn", function()
-			require("telescope").extensions.file_browser.file_browser({ path = vim.fn.stdpath("config") })
+			builtin.find_files({ cwd = vim.fn.stdpath("config") })
 		end, { desc = "[S]earch [N]eovim files" })
 
-		vim.keymap.set("n", "<leader>sp", function()
+		-- Open file browser in project directory
+		vim.keymap.set("n", "<leader>ep", function()
 			require("telescope").extensions.file_browser.file_browser({ path = "~/Projects" })
-		end, { desc = "[S]earch [P]rojects directory" })
+		end, { desc = "[E]xplore [P]rojects directory" })
+
+		-- Open file browser at current directory
+		vim.keymap.set("n", "<leader>ef", function()
+			require("telescope").extensions.file_browser.file_browser({ path = "%:p:h" })
+		end, { desc = "[E]xplore [F]iles in current directory" })
+		-- Search files in cwd
+		vim.keymap.set("n", "<leader>sf", function()
+			builtin.find_files()
+		end, { desc = "[S]earch [F]iles in current directory" })
+
+		-- Search current repository
+		vim.keymap.set("n", "<leader>sr", function()
+			builtin.git_files()
+		end, { desc = "[S]earch [R]epository files" })
+
+		--  NOTE: Jumps
+		--
+		vim.keymap.set("n", "gd", builtin.lsp_definitions, { desc = "[D]efinition of word under cursor" })
+		vim.keymap.set("n", "gD", builtin.lsp_type_definitions, { desc = "type [D]efinition of word under cursor" })
+		vim.keymap.set("n", "gr", builtin.lsp_references, { desc = "[R]eferences of word under cursor" })
+
+		-- Open telescope file search relative to current file
 	end,
 }
