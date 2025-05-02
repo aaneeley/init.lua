@@ -109,6 +109,12 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		--  NOTE: Jumps
 		--
 		vim.keymap.set("n", "gd", builtin.lsp_definitions, { desc = "[D]efinition of word under cursor" })
+		vim.keymap.set(
+			"n",
+			"<C-w>gd",
+			"<cmd>vsplit | Telescope lsp_definitions<CR>",
+			{ desc = "[D]efinition of word under cursor in new vsplit" }
+		)
 		vim.keymap.set("n", "gD", builtin.lsp_type_definitions, { desc = "type [D]efinition of word under cursor" })
 		vim.keymap.set("n", "gr", builtin.lsp_references, { desc = "[R]eferences of word under cursor" })
 
