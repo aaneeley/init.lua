@@ -11,6 +11,10 @@ vim.keymap.set(
 	{ noremap = true, desc = "Show [h]over documentation for symbol (same as [K])" }
 )
 
+-- Beginning and end of line rebinds
+vim.keymap.set("n", "H", "^", { desc = "Move to first non empty character of line" })
+vim.keymap.set("n", "L", "$", { desc = "Move to last non empty character of line" })
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 -- See `:help hlsearch`
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
