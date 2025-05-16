@@ -36,7 +36,8 @@ vim.opt.scrolloff = 10
 
 vim.opt.colorcolumn = "80"
 
-vim.o.winborder = "rounded"
+-- WARN: Breaks telescope
+-- vim.o.winborder = "rounded"
 
 vim.o.winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:CursorLine,Search:Search"
 -- vim.opt.foldmethod = "expr"

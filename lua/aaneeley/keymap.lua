@@ -4,13 +4,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.keymap.set(
-	"n",
-	"gh",
-	vim.lsp.buf.hover,
-	{ noremap = true, desc = "Show [h]over documentation for symbol (same as [K])" }
-)
-vim.keymap.set("n", "gH", vim.diagnostic.open_float, { noremap = true, desc = "Show [h]over diagnostics" })
 
 -- Beginning and end of line rebinds
 vim.keymap.set("n", "H", "^", { desc = "Move to first non empty character of line" })

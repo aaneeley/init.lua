@@ -26,7 +26,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
 		-- See `:help telescope` and `:help telescope.setup()`
 		require("telescope").setup({
 			defaults = {
-				border = false,
+				border = true,
 				theme = "center",
 				sorting_strategy = "ascending",
 				layout_config = {

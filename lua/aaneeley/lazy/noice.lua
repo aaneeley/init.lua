@@ -1,9 +1,6 @@
 return {
 	"folke/noice.nvim",
 	event = "VeryLazy",
-	opts = {
-		-- add any options here
-	},
 	dependencies = {
 		-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
 		"MunifTanjim/nui.nvim",
@@ -12,4 +9,24 @@ return {
 		--   If not available, we use `mini` as the fallback
 		"rcarriga/nvim-notify",
 	},
+	config = function()
+		require("noice").setup({
+			-- add any options here
+			presets = {
+				lsp_doc_border = true,
+			},
+			views = {
+				hover = {
+					border = { style = "rounded" },
+				},
+			},
+		})
+		vim.keymap.set(
+			"n",
+			"gh",
+			require("noice.lsp").hover,
+			{ noremap = true, desc = "Show [h]over documentation for symbol (same as [K])" }
+		)
+		vim.keymap.set("n", "gH", vim.diagnostic.open_float, { noremap = true, desc = "Show [h]over diagnostics" })
+	end,
 }
