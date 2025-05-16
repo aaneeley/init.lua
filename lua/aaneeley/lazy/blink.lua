@@ -53,13 +53,14 @@ return { -- Autocompletion
 		appearance = {
 			nerd_font_variant = "mono",
 		},
-
 		completion = {
 			documentation = {
-				border = "rounded",
-				winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
 				auto_show = true,
 				auto_show_delay_ms = 500,
+				window = {
+					border = "rounded",
+					winhighlight = "Normal:BlinkCmpDoc,FloatBorder:FloatBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
+				},
 			},
 			menu = {
 				border = "rounded",
