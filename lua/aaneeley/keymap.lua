@@ -47,3 +47,10 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.keymap.set("n", "<leader>rr", ":vsplit | terminal cargo run<CR>", { buffer = true })
 	end,
 })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "go",
+	callback = function()
+		vim.keymap.set("n", "<leader>rt", ":vsplit | terminal grc go test -v ./...<CR>", { buffer = true })
+		vim.keymap.set("n", "<leader>rr", ":vsplit | terminal go run .<CR>", { buffer = true })
+	end,
+})
