@@ -39,6 +39,9 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
 -- Open terminal in new tab
 vim.keymap.set("n", "<leader>t", "<cmd>tabnew | terminal<CR>", { desc = "Open terminal in new tab" })
 
+-- Show blame
+vim.keymap.set("n", "<leader>b", "<cmd>Gitsigns blame<CR>", { desc = "Show blame" })
+
 -- Language server keymaps
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "rust",

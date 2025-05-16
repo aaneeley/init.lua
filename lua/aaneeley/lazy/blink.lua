@@ -55,7 +55,12 @@ return { -- Autocompletion
 		},
 
 		completion = {
-			documentation = { auto_show = true, auto_show_delay_ms = 500 },
+			documentation = {
+				border = "rounded",
+				winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
+				auto_show = true,
+				auto_show_delay_ms = 500,
+			},
 			menu = {
 				border = "rounded",
 				winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:BlinkCmpMenuSelection,Search:None",
