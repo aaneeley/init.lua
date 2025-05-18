@@ -1,44 +1,44 @@
--- See `:help vim.opt` or `:help option-list`
+-- See `:help vim.o` or `:help option-list`
 
 vim.g.have_nerd_font = true
 
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.o.number = true
+vim.o.relativenumber = true
 
 -- Don't show the mode, since it's already in the status line
-vim.opt.showmode = false
+vim.o.showmode = false
 
 --  See `:help 'clipboard'`
 vim.schedule(function()
-	vim.opt.clipboard = "unnamedplus"
+	vim.o.clipboard = "unnamedplus"
 end)
 
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
 
-vim.opt.undofile = true
+vim.o.undofile = true
 
-vim.opt.signcolumn = "yes"
+vim.o.signcolumn = "yes"
 
-vim.opt.updatetime = 250
-vim.opt.timeoutlen = 300
+vim.o.updatetime = 250
+vim.o.timeoutlen = 300
 
-vim.opt.splitright = true
+vim.o.splitright = true
 
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
+vim.o.hlsearch = false
+vim.o.incsearch = true
 
-vim.opt.cursorline = true
+vim.o.cursorline = true
 
-vim.opt.scrolloff = 10
+vim.o.scrolloff = 10
 
-vim.opt.colorcolumn = "80"
+vim.o.colorcolumn = "80"
 
 -- WARN: Breaks telescope
 -- vim.o.winborder = "rounded"
 
 vim.o.winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:CursorLine,Search:Search"
--- vim.opt.foldmethod = "expr"
--- vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.o.foldmethod = "expr"
+-- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
