@@ -4,16 +4,61 @@ return { -- Autocompletion
 	version = "1.*",
 	dependencies = {
 		"saghen/blink.compat",
-		-- Supermaven
+		-- Minuet for AI completion
 		{
-			"supermaven-inc/supermaven-nvim",
-			opts = {
-				keymaps = {
-					accept_suggestion = nil,
-				},
-				disable_inline_completion = false,
-			},
+			"milanglacier/minuet-ai.nvim",
+			config = function()
+				require("minuet").setup({
+					blink = {
+						enable_auto_complete = true,
+					},
+					virtualtext = {
+						auto_trigger_ft = { "*" },
+						keymap = {
+							-- accept whole completion
+							accept = "<A-A>",
+							-- accept one line
+							accept_line = "<A-a>",
+							-- accept n lines (prompts for number)
+							-- e.g. "A-z 2 CR" will accept 2 lines
+							accept_n_lines = "<A-z>",
+							-- Cycle to prev completion item, or manually invoke completion
+							prev = "<A-[>",
+							-- Cycle to next completion item, or manually invoke completion
+							next = "<A-]>",
+							dismiss = "<A-e>",
+						},
+					},
+					provider = "openai_fim_compatible",
+					n_completions = 1, -- recommend for local model for resource saving
+					context_window = 512,
+					provider_options = {
+						openai_fim_compatible = {
+							-- For Windows users, TERM may not be present in environment variables.
+							-- Consider using APPDATA instead.
+							api_key = "TERM",
+							name = "Ollama",
+							end_point = "http://localhost:11434/v1/completions",
+							model = "qwen2.5-coder:3b",
+							optional = {
+								max_tokens = 56,
+								top_p = 0.9,
+							},
+						},
+					},
+				})
+			end,
 		},
+		-- Supermaven
+		-- {
+		-- 	"supermaven-inc/supermaven-nvim",
+		-- 	opts = {
+		-- 		keymaps = {
+		-- 			accept_suggestion = nil,
+		-- 		},
+		-- 		disable_inline_completion = false,
+		-- 	},
+		-- },
 		-- Snippet Engine
 		-- {
 		-- 	"L3MON4D3/LuaSnip",
@@ -92,14 +137,17 @@ return { -- Autocompletion
 		},
 
 		sources = {
-			default = { "lsp", "path", "lazydev", "supermaven" },
+			default = { "lsp", "path", "lazydev", "minuet" },
 			providers = {
 				lazydev = { module = "lazydev.integrations.blink", score_offset = 4 },
-				supermaven = {
-					name = "supermaven",
-					module = "blink.compat.source",
-					min_keyword_length = 0,
-					score_offset = 100,
+				minuet = {
+					name = "minuet",
+					module = "minuet.blink",
+					async = true,
+					-- Should match minuet.config.request_timeout * 1000,
+					-- since minuet.config.request_timeout is in seconds
+					timeout_ms = 3000,
+					score_offset = 100, -- Gives minuet higher priority among suggestions
 				},
 				lsp = {
 					min_keyword_length = 0,

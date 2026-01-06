@@ -4,7 +4,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-
 -- Beginning and end of line rebinds
 vim.keymap.set("n", "H", "^", { desc = "Move to first non empty character of line" })
 vim.keymap.set("n", "L", "$", { desc = "Move to last non empty character of line" })
